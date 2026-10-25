@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction E · One Window — Studio Oriel (style study)</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEEEE9;--ink:#2B2420;--moss:#7D8573;--clay:#A4674A;--sans:'Jost',system-ui,sans-serif;--serif:'Source Serif 4',Georgia,serif;--ease:cubic-bezier(.23,1,.32,1);--bay:polygon(9% 0,91% 0,100% 11%,100% 100%,0 100%,0 11%)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:300 19px/1.7 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--clay);outline-offset:4px}
+.caps{font:500 12px var(--sans);letter-spacing:.26em;text-transform:uppercase}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:30px 5vw}
+header nav{display:flex;gap:30px}header nav:last-child{justify-content:flex-end;align-items:center}
+header a{text-decoration:none}
+.word{font:500 15px var(--sans);letter-spacing:.34em;text-transform:uppercase}
+.cta{border-bottom:1px solid var(--clay);padding-bottom:3px;color:var(--ink)}
+.hero{display:grid;grid-template-columns:5fr 6fr;gap:6vw;align-items:center;padding:3vh 8vw 12vh}
+.hero h1{font:300 clamp(34px,4vw,60px)/1.12 var(--serif);letter-spacing:-.01em;margin:16px 0 20px}
+.hero p{max-width:34ch}
+.frameWrap{position:relative;padding:1px;background:var(--ink);clip-path:var(--bay)}
+.frame{position:relative;clip-path:var(--bay);aspect-ratio:4/5;background:#d8d6cf;overflow:hidden}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;filter:brightness(1.08) contrast(.88) saturate(.7) sepia(.12)}
+.frame img.on{opacity:1;animation:drift 12s ease-out forwards}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.03)}}
+.ctrl{display:flex;gap:18px;margin-top:20px;justify-content:flex-end;align-items:center}
+.ctrl button{background:none;border:0;border-bottom:1px solid var(--ink);font:500 12px var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--ink);cursor:pointer;padding:2px 0}
+.ctrl button:hover{border-color:var(--clay)}
+.ctrl span{font:400 12px var(--sans);letter-spacing:.2em;color:#5a524b;margin-right:auto}
+.frag{position:absolute;opacity:0;transform:translateY(10px);transition:opacity .9s var(--ease),transform .9s var(--ease);box-shadow:0 0 0 1px var(--bg)}
+.frag img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(1.08) contrast(.88) saturate(.7) sepia(.12)}
+.in .frag{opacity:1;transform:none}
+.f1{width:92px;height:116px;left:-46px;bottom:12%;transition-delay:1.2s}
+.f2{width:76px;height:76px;right:-34px;top:20%;transition-delay:1.6s}
+.hw{position:relative}
+.case{padding:12vh 8vw;display:grid;grid-template-columns:6fr 5fr;gap:6vw;align-items:center;background:#E4E4DD}
+.case .frameWrap{max-width:560px;justify-self:end;width:100%}
+.case .frame{aspect-ratio:5/6}
+.case .frame img{opacity:1;animation:none}
+.case h2{font:300 clamp(30px,3.4vw,50px)/1.1 var(--serif);margin:14px 0 16px}
+.case .meta{font:500 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#5a524b;margin-top:20px}
+.open{display:inline-block;margin-top:24px;text-decoration:none;border-bottom:1px solid var(--clay);padding-bottom:3px}
+.svc{padding:14vh 8vw 6vh;text-align:center}
+.svc ul{list-style:none;padding:0;max-width:640px;margin:36px auto 0;text-align:left}
+.svc li a{display:flex;justify-content:space-between;gap:20px;padding:20px 0;text-decoration:none;border-bottom:1px solid rgba(43,36,32,.25);background:linear-gradient(var(--clay),var(--clay)) 0 100%/0 1px no-repeat;transition:background-size .5s var(--ease)}
+.svc li a:hover,.svc li a:focus-visible{background-size:100% 1px}
+.svc li b{font:300 26px var(--serif)}
+.svc li span{font:400 15px var(--serif);color:#5a524b;text-align:right}
+.phil{padding:14vh 8vw 18vh;text-align:center;position:relative}
+.phil q{display:block;font:300 clamp(30px,4.2vw,62px)/1.15 var(--serif);max-width:18ch;margin:22px auto 0;quotes:none}
+.dots{display:flex;gap:10px;justify-content:center;margin-top:40px}
+.dots i{width:30px;height:40px;background:var(--moss);opacity:.35;clip-path:var(--bay)}
+.dots i.on{opacity:1}
+footer{padding:0 8vw 100px;font:400 13px var(--sans);letter-spacing:.06em;color:#5a524b;text-align:center}
+.tag{position:fixed;left:14px;bottom:14px;z-index:9;background:var(--ink);color:#fff;font:500 12px var(--sans);padding:8px 12px;display:flex;gap:10px}
+.tag a{color:#fff;opacity:.75}
+@media (max-width:860px){
+ header{grid-template-columns:1fr auto;padding:20px 18px}header nav:first-child{display:none}header nav:last-child a:not(.cta){display:none}.word{font-size:12px}
+ .hero,.case{grid-template-columns:1fr;gap:40px;padding-left:28px;padding-right:28px}.hero{padding-bottom:70px}.f1{left:-18px;width:70px;height:88px}.f2{right:-14px;width:56px;height:56px}
+ .case .frameWrap{justify-self:stretch}.svc,.phil,footer{padding-left:20px;padding-right:20px}.svc li a{flex-direction:column;gap:2px}.svc li span{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){.frame img{transition:none}.frame img.on{animation:none}.frag{transition:none;opacity:1;transform:none}.svc li a{transition:none}}
+</style></head><body>
+<header><nav class="caps"><a href="#work">Work</a><a href="#services">Services</a><a href="#philosophy">Philosophy</a></nav><a class="word" href="#">Studio Oriel</a><nav class="caps"><a href="#philosophy" style="display:none">·</a><a class="cta" href="#contact">Start a conversation</a></nav></header>
+<main>
+<section class="hero" id="top">
+ <div><div class="caps" style="color:#5a524b">Architecture · Placeholder</div><h1>A window is where a building meets the day.</h1><p>Studio Oriel designs houses, libraries and small public buildings. Placeholder text for a style study.</p></div>
+ <div class="hw" id="hw"><div class="frameWrap"><div class="frame" id="frame">
+   <img class="on" src="https://images.unsplash.com/photo-1732260239896-94149ee890b6?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Soft light moving across a wall above a stair">
+   <img src="https://images.unsplash.com/photo-1759661030081-285e363a9135?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Concrete tower facade with recessed windows">
+   <img src="https://images.unsplash.com/photo-1768049994214-5df7d70fc078?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Stairway rising to a bright doorway" style="object-position:50% 60%">
+  </div></div>
+  <div class="frag f1"><img src="https://images.unsplash.com/photo-1785590134335-2ff3b0e9beff?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Fragment: tower facade window column"></div><div class="frag f2"><img src="https://images.unsplash.com/photo-1737244347972-b685b5b2ab9b?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Fragment: concrete wall"></div>
+  <div class="ctrl"><span id="count">1 / 3</span><button id="prev" aria-label="Previous image">Prev</button><button id="next" aria-label="Next image">Next</button></div></div>
+</section>
+<section class="case" id="work"><div><div class="caps" style="color:#5a524b">Case study 01</div><h2>House on the Ridge</h2><p>Placeholder paragraph. One long room, a thick wall to the north, a single window cut toward the valley.</p><div class="meta">Fictional town · 2024 · Residential</div><a class="open" href="#work">Open the project</a></div>
+ <div class="frameWrap"><div class="frame"><img src="https://images.unsplash.com/photo-1760036275136-724b38001759?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Curved concrete bands of a stepped facade" style="object-position:50% 40%"></div></div></section>
+<section class="svc" id="services"><div class="caps" style="color:#5a524b">Services</div>
+ <ul><li><a href="#"><b>Architecture</b><span>New houses, small public buildings</span></a></li><li><a href="#"><b>Interiors</b><span>Rooms, joinery, light</span></a></li><li><a href="#"><b>Masterplanning</b><span>Sites and how they are read</span></a></li><li><a href="#"><b>Heritage &amp; retrofit</b><span>Old walls, new use</span></a></li></ul></section>
+<section class="phil" id="philosophy"><div class="caps" style="color:#5a524b">Philosophy</div><q>Begin with the window, end with the street.</q><div class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></section>
+</main>
+<footer id="contact">Studio Oriel is a fictional practice project. Placeholder content. Photo credits: docs/IMAGE_CREDITS.md</footer>
+<div class="tag"><span>E · One Window</span><a href="index.html">all directions</a></div>
+<script>
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const imgs=[...document.querySelectorAll('#frame img')],cnt=document.getElementById('count');let i=0,timer;
+function go(n){imgs[i].classList.remove('on');i=(n+imgs.length)%imgs.length;imgs[i].classList.add('on');cnt.textContent=(i+1)+' / '+imgs.length}
+function auto(){clearInterval(timer);if(!rm)timer=setInterval(()=>go(i+1),7000)}
+document.getElementById('next').onclick=()=>{go(i+1);auto()};document.getElementById('prev').onclick=()=>{go(i-1);auto()};auto();
+requestAnimationFrame(()=>document.getElementById('hw').classList.add('in'));
+</script></body></html>

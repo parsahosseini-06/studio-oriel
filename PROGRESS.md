@@ -3,9 +3,9 @@
 | Phase | Name | Status |
 |---|---|---|
 | 0 | Setup | done (Dex), build verified by Milo; Ship does git next |
-| 1 | Brief and research | files done (Nora), checked by Milo; waiting for Parsa to review, Refero not yet used |
-| 2 | Visual direction | not started |
-| 3 | Design DNA | not started |
+| 1 | Brief and research | done (Nora), checked by Milo; Refero not used (Parsa skipped it) |
+| 2 | Visual direction | done: Parsa chose C (Survey Sheet) on 2026-10-25; interactive hero prototype built |
+| 3 | Design DNA | in progress (Vera); needs Parsa approval |
 | 4 | UX and content | not started |
 | 5 | Mockups | not started |
 | 6 | Tokens and foundation | not started |

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction B · Gridwork — Studio Oriel (style study)</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F7F7;--ink:#16181A;--rule:#8B9094;--ox:#B0432B;--sans:'Schibsted Grotesk',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ox);outline-offset:3px}
+.rail{position:fixed;inset:0 auto 0 0;width:84px;border-right:1px solid var(--rule);background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:22px 0;z-index:5;font:400 12px var(--mono)}
+.rail ol{list-style:none;padding:0;display:grid;gap:14px}
+.rail a{text-decoration:none;color:var(--rule);transition:color .15s}
+.rail a.on{color:var(--ink)}
+.rail .w{writing-mode:vertical-rl;transform:rotate(180deg);font:600 15px var(--sans);letter-spacing:.04em;text-decoration:none}
+main{margin-left:84px}
+.g{display:grid;grid-template-columns:repeat(12,1fr);gap:0 24px;padding:0 40px}
+.top{display:flex;justify-content:flex-end;gap:28px;padding:24px 40px;font-size:14px;align-items:center}
+.top a{text-decoration:none}
+.btn{background:var(--ox);color:#fff;padding:11px 18px;font-weight:600;transition:background .15s}
+.btn:hover{background:#8f3320}
+.sec{padding-top:56px}
+.num{font:400 12px var(--mono);color:var(--rule);display:block;margin-bottom:10px}
+/* hero */
+.hero{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:92px;gap:2px;background:var(--rule);border:2px solid var(--rule)}
+.t{position:relative;overflow:hidden;background:var(--bg);clip-path:inset(0 100% 0 0);animation:wipe .7s var(--ease) forwards;animation-delay:calc(var(--i)*60ms)}
+@keyframes wipe{to{clip-path:inset(0)}}
+.t img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) contrast(1.02) hue-rotate(-4deg) brightness(1.02);transition:object-position .5s var(--ease),transform .5s var(--ease);transform:scale(var(--z,1))}
+.t:hover img{object-position:var(--hp,50% 50%);transform:scale(calc(var(--z,1) + .12))}
+.t.txt{background:var(--bg);padding:26px 26px;display:flex;flex-direction:column;justify-content:space-between}
+h1{font:600 clamp(36px,4.6vw,68px)/1 var(--sans);letter-spacing:-.035em}
+.cap{font:400 12px var(--mono);color:#4a4f53}
+.h1{grid-column:1/6;grid-row:1/5}
+.h2{grid-column:6/10;grid-row:1/4;--z:1.25;--hp:70% 10%}
+.h3{grid-column:10/13;grid-row:1/3;--z:1.6;--hp:50% 30%}
+.h4{grid-column:10/13;grid-row:3/6;--hp:30% 80%}
+.h5{grid-column:1/4;grid-row:5/7;--z:1.4;--hp:40% 20%}
+.h6{grid-column:4/6;grid-row:5/7;--z:1.8;--hp:50% 70%}
+.h7{grid-column:6/10;grid-row:4/7}
+.t.txt.h8{grid-column:10/13;grid-row:6/7;background:var(--ox);color:#fff}
+/* case */
+.case{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:2px;background:var(--rule);border:2px solid var(--rule);margin-top:26px}
+.case{grid-template-rows:260px 258px}.c1{grid-column:1/8;grid-row:1/3}.c2{grid-column:8/13}.c3{grid-column:8/11}.c4{grid-column:11/13}
+.c1,.c2,.c3,.c4{min-height:0;overflow:hidden}.c1 img,.c2 img,.c3 img,.c4 img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) contrast(1.02) brightness(1.02)}
+.c2{grid-row:1}.c3,.c4{grid-row:2}
+.cap-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:22px}
+.cap-row h2{grid-column:1/6;font:600 36px/1.05 var(--sans);letter-spacing:-.03em}
+.cap-row p{grid-column:6/11}
+.facts{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule);margin-top:24px}
+.facts div{padding:12px 0;font:400 13px var(--mono)}
+.facts b{display:block;font:400 11px var(--mono);color:var(--rule);text-transform:uppercase;letter-spacing:.1em}
+/* services */
+.svc{grid-column:1/-1;border-top:1px solid var(--ink)}
+.svc a{display:grid;grid-template-columns:70px 1fr 1.4fr 30px;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule);text-decoration:none;align-items:baseline;position:relative}
+.svc a::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ox);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.svc a:hover::after,.svc a:focus-visible::after{transform:scaleX(1)}
+.svc i{font:400 12px var(--mono);color:var(--rule);font-style:normal}
+.svc b{font:600 24px var(--sans);letter-spacing:-.02em}
+.svc span{color:#4a4f53}
+/* phil */
+.phil{grid-column:1/-1;padding:40px 0 100px}
+.phil q{display:block;font:600 clamp(32px,4.4vw,64px)/1.02 var(--sans);letter-spacing:-.035em;max-width:16ch;quotes:none}
+footer{padding:0 40px 90px;font:400 12px var(--mono);color:#4a4f53;margin-left:84px}
+.tag{position:fixed;right:14px;bottom:14px;z-index:9;background:var(--ink);color:#fff;font:500 12px var(--sans);padding:8px 12px;display:flex;gap:10px}
+.tag a{color:#fff;opacity:.75}
+@media (max-width:860px){
+ .rail{inset:0 0 auto 0;width:auto;height:52px;flex-direction:row;border-right:0;border-bottom:1px solid var(--rule);padding:0 16px}
+ .rail ol{display:flex;gap:16px}.rail .w{writing-mode:horizontal-tb;transform:none;order:-1}
+ main,footer{margin-left:0}main{padding-top:52px}
+ .g,.top{padding-left:16px;padding-right:16px}.top a:not(.btn){display:none}
+ .hero{grid-auto-rows:64px;grid-template-columns:repeat(6,1fr)}
+ .hero .t.h1{grid-column:1/7;grid-row:1/4}.hero .t.h2{grid-column:1/4;grid-row:4/7}.hero .t.h3{grid-column:4/7;grid-row:4/6}.hero .t.h4{grid-column:4/7;grid-row:6/8}.hero .t.h5{grid-column:1/3;grid-row:7/9}.hero .t.h6{grid-column:3/4;grid-row:7/9}.hero .t.h7{grid-column:1/7;grid-row:9/12}.hero .t.h8{grid-column:4/7;grid-row:8/9}
+ .h1.t.txt{padding:18px}
+ .case{grid-template-rows:300px 180px 150px}.c1{grid-column:1/13;grid-row:1}.c2{grid-column:1/13;grid-row:2}.c3{grid-column:1/8;grid-row:3}.c4{grid-column:8/13;grid-row:3}
+ .cap-row h2,.cap-row p{grid-column:1/-1}.facts{grid-template-columns:1fr 1fr}
+ .svc a{grid-template-columns:36px 1fr;gap:6px 12px}.svc span{grid-column:2}.svc a>:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){.t{animation:none;clip-path:none}.t img,.svc a::after,.rail a{transition:none}}
+</style></head><body>
+<nav class="rail" aria-label="Sections"><a class="w" href="#top">Studio Oriel</a><ol><li><a href="#s1" data-s="s1" class="on">01</a></li><li><a href="#s2" data-s="s2">02</a></li><li><a href="#s3" data-s="s3">03</a></li><li><a href="#s4" data-s="s4">04</a></li></ol><span></span></nav>
+<main id="top">
+<div class="top"><a href="#s2">Work</a><a href="#s3">Services</a><a href="#s4">Philosophy</a><a class="btn" href="#s5">Start a conversation</a></div>
+<div class="g" id="s1"><div class="hero">
+ <div class="t txt h1" style="--i:0"><div class="cap">01 / Studio</div><h1>Architecture, set like a monograph.</h1><div class="cap">Placeholder · Studio Oriel is fictional</div></div>
+ <div class="t h2" style="--i:1"><img src="https://images.unsplash.com/photo-1759661030081-285e363a9135?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Concrete tower facade with recessed windows"></div>
+ <div class="t h3" style="--i:2"><img src="https://images.unsplash.com/photo-1785590134335-2ff3b0e9beff?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Tower facade with a single column of windows"></div>
+ <div class="t h4" style="--i:3"><img src="https://images.unsplash.com/photo-1737244347972-b685b5b2ab9b?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Concrete wall with tall narrow windows"></div>
+ <div class="t h5" style="--i:4"><img src="https://images.unsplash.com/photo-1760036275136-724b38001759?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Curved banded facade"></div>
+ <div class="t h6" style="--i:5"><img src="https://images.unsplash.com/photo-1732260239896-94149ee890b6?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Light on a stair"></div>
+ <div class="t h7" style="--i:6"><img src="https://images.unsplash.com/photo-1768049994214-5df7d70fc078?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Dark stairway toward a bright doorway"></div>
+ <div class="t txt h8" style="--i:7"><div class="cap" style="color:#fff">Fig. 01</div><div style="font-weight:600">Start a conversation →</div></div>
+</div></div>
+
+<div class="g sec" id="s2"><span class="num" style="grid-column:1/-1">02 / Case study</span>
+ <div class="case"><div class="c1"><img src="https://images.unsplash.com/photo-1760036275136-724b38001759?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Banded facade" style="object-position:50% 45%"></div><div class="c2"><img src="https://images.unsplash.com/photo-1759661030081-285e363a9135?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Facade detail" style="object-position:50% 20%"></div><div class="c3"><img src="https://images.unsplash.com/photo-1737244347972-b685b5b2ab9b?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Concrete wall"></div><div class="c4"><img src="https://images.unsplash.com/photo-1785590134335-2ff3b0e9beff?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Window column" style="object-position:50% 50%"></div></div>
+ <div class="cap-row"><h2>House on the Ridge</h2><p>Placeholder paragraph. One long room, a thick wall to the north, a window cut to the valley.</p></div>
+ <div class="facts"><div><b>Place</b>Fictional town</div><div><b>Year</b>2024</div><div><b>Type</b>Residential</div><div><b>Role</b>Full service</div></div>
+</div>
+
+<div class="g sec" id="s3"><span class="num" style="grid-column:1/-1">03 / Services</span>
+ <div class="svc"><a href="#"><i>3.1</i><b>Architecture</b><span>New houses and small public buildings.</span><em>→</em></a><a href="#"><i>3.2</i><b>Interiors</b><span>Rooms, joinery, light.</span><em>→</em></a><a href="#"><i>3.3</i><b>Masterplanning</b><span>Sites and how they are read.</span><em>→</em></a><a href="#"><i>3.4</i><b>Heritage &amp; retrofit</b><span>Old walls, new use.</span><em>→</em></a></div>
+</div>
+<div class="g sec" id="s4"><span class="num" style="grid-column:1/-1">04 / Philosophy</span><div class="phil"><q>Begin with the window, end with the street.</q></div></div>
+</main>
+<footer id="s5">Studio Oriel is a fictional practice project. Placeholder content. Photo credits: docs/IMAGE_CREDITS.md</footer>
+<div class="tag"><span>B · Gridwork</span><a href="index.html">all directions</a></div>
+<script>
+const links=[...document.querySelectorAll('.rail a[data-s]')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.dataset.s===e.target.id))}}),{rootMargin:'-40% 0px -55% 0px'});
+['s1','s2','s3','s4'].forEach(id=>io.observe(document.getElementById(id)));
+</script></body></html>

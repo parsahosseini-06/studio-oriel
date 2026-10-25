@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction A · Paper Strata — Studio Oriel (style study)</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#F1EDE6;--ink:#1B1A18;--clay:#B9B2A6;--sage:#8C9486;--blue:#23304A;--serif:'Newsreader',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif;--ease:cubic-bezier(.23,1,.32,1)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.word{font:500 22px var(--serif);letter-spacing:.01em;text-decoration:none}
+nav{display:flex;gap:28px;align-items:center;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+nav a{text-decoration:none}
+.tab{background:var(--clay);padding:10px 18px;box-shadow:0 1px 0 rgba(27,26,24,.25);transition:transform .2s var(--ease)}
+.tab:hover{transform:translateY(-2px)}
+.photo{position:relative;overflow:hidden;background:var(--clay);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 2px 4px rgba(27,26,24,.22),0 14px 28px -10px rgba(27,26,24,.3)}
+.photo img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.75) contrast(.96) brightness(1.04)}
+.photo::after{content:"";position:absolute;inset:0;opacity:.14;mix-blend-mode:multiply;pointer-events:none;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+/* hero */
+.stage{position:relative;height:700px;margin-top:8px}
+.layer{position:absolute;translate:calc(var(--mx,0)*var(--d,10)*1px) calc(var(--my,0)*var(--d,10)*1px);opacity:0;animation:drop .7s var(--ease) forwards}
+@keyframes drop{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.l1{left:0;top:30px;width:64%;height:560px;--d:6;animation-delay:.05s}
+.l1 .photo{height:100%;clip-path:polygon(0 0,100% 0,100% 84%,90% 100%,0 100%)}
+.l2{right:2%;top:0;width:27%;aspect-ratio:4/5;--d:14;animation-delay:.25s}
+.l2 .photo{height:100%}
+.l3{right:14%;bottom:20px;width:21%;aspect-ratio:1;--d:10;animation-delay:.45s}
+.l3 .photo{height:100%;clip-path:polygon(0 0,100% 0,100% 100%,14% 100%,0 86%)}
+.sheet{position:absolute;left:4%;bottom:0;width:46%;background:var(--bone);padding:36px 40px 34px;box-shadow:0 2px 4px rgba(27,26,24,.18),0 18px 30px -12px rgba(27,26,24,.28);--d:3;animation-delay:.65s}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#4d4a44}
+h1{font:400 clamp(34px,4.2vw,58px)/1.06 var(--serif);letter-spacing:-.01em;margin:14px 0 18px}
+.sheet p{max-width:44ch;color:#3c3a36}
+.cta{display:inline-block;margin-top:22px;color:var(--blue);font-weight:500;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+/* case study */
+section{padding:110px 0 0}
+.case{display:grid;grid-template-columns:1.15fr 1fr;gap:0;align-items:center;position:relative}
+.cs-a{height:520px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.cs-a .photo{height:100%}
+.cs-b{position:absolute;left:36%;top:64%;width:22%;aspect-ratio:3/4;z-index:2}
+.cs-b .photo{height:100%;transition:transform .3s var(--ease)}
+.cs-b:hover .photo{transform:translateY(-4px)}
+.paper{background:var(--sage);color:#14170f;padding:56px 48px 56px 120px;margin-left:-70px;min-height:420px;position:relative;box-shadow:0 18px 30px -14px rgba(27,26,24,.35)}
+.paper .eyebrow{color:#1d2118}
+.paper h2{font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);margin:12px 0 18px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;font-size:14px;margin-top:22px}
+dt{text-transform:uppercase;letter-spacing:.12em;font-size:11px;padding-top:3px}
+.note{font-size:12px;color:#4d4a44;margin-top:14px}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:20px}
+.svc a{background:#E7E1D7;padding:26px 22px 90px;text-decoration:none;box-shadow:0 1px 2px rgba(27,26,24,.18),0 10px 18px -10px rgba(27,26,24,.25);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.svc a:hover,.svc a:focus-visible{transform:translateY(-2px);box-shadow:0 2px 3px rgba(27,26,24,.2),0 16px 22px -10px rgba(27,26,24,.32)}
+.svc a:nth-child(even){background:#DAD4C8}
+.svc b{display:block;font:500 22px var(--serif);margin-bottom:8px}
+.svc span{font-size:14px;color:#4d4a44}
+.sec-h{font:400 13px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#4d4a44}
+/* philosophy */
+.phil{margin:110px 0 0;background:var(--clay);padding:90px 0 110px}
+.phil q{display:block;font:400 clamp(30px,4vw,54px)/1.12 var(--serif);max-width:20ch;quotes:none}
+.phil .sheet2{background:var(--bone);display:inline-block;padding:44px 52px;box-shadow:0 2px 4px rgba(27,26,24,.18),0 18px 30px -12px rgba(27,26,24,.3);margin-left:6%}
+.phil .p-photo{float:right;width:24%;aspect-ratio:3/4;margin-right:4%;margin-top:-170px}
+.phil .p-photo .photo{height:100%;clip-path:polygon(0 0,100% 0,100% 100%,14% 100%,0 86%)}
+footer{padding:36px 0 90px;font-size:13px;color:#4d4a44}
+.tag{position:fixed;left:14px;bottom:14px;z-index:9;background:var(--ink);color:#fff;font:500 12px var(--sans);letter-spacing:.06em;padding:8px 12px;display:flex;gap:10px;align-items:center}
+.tag a{color:#fff;opacity:.75}
+@media (max-width:860px){
+ .wrap{padding:0 18px} nav a:not(.tab){display:none}
+ .stage{height:auto;padding-bottom:10px}
+ .layer{position:absolute}
+ .stage{height:520px}
+ .l1{width:92%;height:300px;top:10px}.l2{width:38%;right:0;top:120px}.l3{width:30%;right:30%;bottom:150px}
+ .sheet{position:absolute;left:0;right:0;width:auto;bottom:0;padding:24px 22px}
+ .case{grid-template-columns:1fr}.cs-a{height:340px}.cs-b{left:auto;right:6%;top:250px;width:34%}
+ .paper{margin:0;padding:80px 22px 40px;min-height:0}
+ .svc{grid-template-columns:1fr 1fr}.svc a{padding-bottom:36px}
+ .phil .sheet2{margin:0;padding:28px 22px}.phil .p-photo{float:none;width:40%;margin:20px 0 0 auto}
+ section{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){.layer{animation:none;opacity:1;translate:none}.tab,.svc a,.cs-b .photo{transition:none}html{scroll-behavior:auto}}
+</style></head><body>
+<div class="wrap">
+<header><a class="word" href="#">Studio Oriel</a><nav><a href="#work">Work</a><a href="#services">Services</a><a href="#philosophy">Philosophy</a><a class="tab" href="#contact">Start a conversation</a></nav></header>
+<div class="stage" id="stage">
+ <div class="layer l1"><div class="photo"><img src="https://images.unsplash.com/photo-1768049994214-5df7d70fc078?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Dark stairway rising toward a bright doorway" style="object-position:50% 60%"></div></div>
+ <div class="layer l2"><div class="photo"><img src="https://images.unsplash.com/photo-1759661030081-285e363a9135?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Concrete tower facade with recessed windows"></div></div>
+ <div class="layer l3"><div class="photo"><img src="https://images.unsplash.com/photo-1732260239896-94149ee890b6?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Soft light and shadow on a stair"></div></div>
+ <div class="layer sheet"><div class="eyebrow">Studio Oriel · Architecture</div><h1>Rooms drawn the way light finds them.</h1><p>An architecture studio for houses, libraries and small public buildings, placeholder text for a style study.</p><a class="cta" href="#work">View the project</a></div>
+</div></div>
+
+<section id="work"><div class="wrap">
+ <div class="case">
+  <div class="cs-a"><div class="photo"><img src="https://images.unsplash.com/photo-1760036275136-724b38001759?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Curved concrete bands of a stepped facade" style="object-position:50% 40%"></div></div>
+  <div class="cs-b"><div class="photo"><img src="https://images.unsplash.com/photo-1737244347972-b685b5b2ab9b?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Weathered concrete wall with narrow windows"></div></div>
+  <div class="paper"><div class="eyebrow">Case study 01</div><h2>House on the Ridge</h2><p>Placeholder paragraph. A low house that keeps its back to the wind and opens one long room toward the valley.</p>
+   <dl><dt>Place</dt><dd>Fictional town</dd><dt>Year</dt><dd>2024</dd><dt>Type</dt><dd>Residential</dd></dl>
+   <p class="note">Images: Unsplash photographers, not the studio's work.</p></div>
+ </div>
+</div></section>
+
+<section id="services"><div class="wrap"><div class="sec-h">Services</div>
+ <div class="svc"><a href="#"><b>Architecture</b><span>New houses and small public buildings.</span></a><a href="#"><b>Interiors</b><span>Rooms, joinery, light.</span></a><a href="#"><b>Masterplanning</b><span>Sites and how they are read.</span></a><a href="#"><b>Heritage &amp; retrofit</b><span>Old walls, new use.</span></a></div>
+</div></section>
+
+<div class="phil" id="philosophy"><div class="wrap">
+ <div class="p-photo"><div class="photo"><img src="https://images.unsplash.com/photo-1785590134335-2ff3b0e9beff?fm=jpg&q=70&w=1400&auto=format&fit=crop" alt="Tower facade with a single column of windows"></div></div>
+ <div class="sheet2"><div class="eyebrow">Philosophy</div><q>Begin with the window, end with the street.</q></div>
+</div></div>
+<div class="wrap"><footer id="contact">Studio Oriel is a fictional practice project. All content is placeholder. Photo credits: docs/IMAGE_CREDITS.md</footer></div>
+<div class="tag"><span>A · Paper Strata</span><a href="index.html">all directions</a></div>
+<script>
+const s=document.getElementById('stage');
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
+ s.addEventListener('pointermove',e=>{const r=s.getBoundingClientRect();s.style.setProperty('--mx',((e.clientX-r.left)/r.width-.5).toFixed(3));s.style.setProperty('--my',((e.clientY-r.top)/r.height-.5).toFixed(3))});
+}
+</script></body></html>
