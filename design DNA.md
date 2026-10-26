@@ -14,7 +14,7 @@ Mirrors: `docs/DESIGN_SYSTEM.md` (sections 5 spacing, 6, 7, 9, 12 and the token 
 | Primary CTA | "Start a conversation" (placeholder form or mailto, no backend) | G0 assumption A5. |
 | Language and direction | English only, LTR, Latin numerals | Parsa's G0 answer; logged in section 14. |
 | Direction chosen | C · Survey Sheet (paper depth from A optional, only if Parsa asks) | Chosen by Parsa 2026-10-25; hero prototype approved. |
-| Approval | **Approved by Parsa, 2026-10-26** | Parsa approved the document in chat ("اره اوکیه فعلا"), including the accent shift and the AGENTS.md exception. |
+| Approval | **Pending Parsa** | Parsa has approved direction and prototype, not this document. |
 
 ## 2. Priorities
 1. **Beauty.** Reason: the brief asks for minimal, luxury, editorial work.
@@ -43,20 +43,23 @@ Source: PROJECT_BRIEF section 6 and G0 assumption A1.
 | Calm | Square, shadowless, little motion, long 900 ms draws only on arrival, generous 128 px section rhythm. |
 
 **The site must not become:** a blueprint cliché (heavy, glowing or animated-noise CAD lines), a generic image grid, collage as noise, motion for show, luxury clichés (gold, serif-italic word swaps), or anything implying the photos are the studio's work.
-Collage method: toned photos sit beneath thin vector overlays; the overlay is always above the photo and never beneath body text. Paper depth from Direction A is **optional** and not included.
+Collage method: toned photos sit beneath thin vector overlays; the overlay is always above the photo and never beneath body text. Panels are required for paragraphs, forms and lists of sentences; headings, mono labels, captions and one-line display quotes may sit on the grid (override C2). Paper depth from Direction A is **optional** and not included.
 
 ## 5. Layout
 | Item | Value | Reason |
 |---|---|---|
 | Grid | 12 columns, 24 px gutter, drafting grid background 48 px | Loose drafting grid from the direction; gutter on the spacing scale. |
 | Max width | 1280 px outer, content inside side margins | Preview value. |
-| Hero composition | Two regions, 7 and 5 columns, 48 px between; left a large duotone photo with plan overlay, right a surface panel with H1, intro and CTA overlapped by a small fragment figure | Approved preview. Left image keeps aspect ratio 35:32 at all widths so overlays and pins stay registered. |
-| Case study | 5 columns image with annotation spots, 7 columns text and two thumbnails | Preview. |
-| Services | 4 equal columns with 1 px dividers, 2 columns below 768 px | Preview. |
-| Philosophy | One display line, max 20ch, with a 220 px rule above | One line carries the idea. |
+| Hero composition | Two regions, 7 and 5 columns, 48 px between; left a large duotone photo with plan overlay, right a surface panel with H1, intro and CTA overlapped by a small fragment figure (overlap stops at the Panel's padding box edge; figure hidden below 1024 px) | Approved preview. Left image keeps aspect ratio 35:32 at all widths so overlays and pins stay registered. |
+| Case study | 5 columns image with annotation spots, 7 columns text and two thumbnails. Stacked at 768 the image height is capped at `min(704px, 80svh)` by cropping (`object-position`); 4:5 kept from 1024 up | Preview. A 4:5 image at 704 px wide is 880 px high, too tall for a tablet. 704 px is the content width at 768 (768 − 2 × `--space-8`), a one-off derived value, not a spacing token. |
+| Services | 4 equal columns with 1 px dividers, 2 columns below 1024 px | Preview; four across would be about 158 px each at 768 to 1023 (override C8). |
+| Philosophy | One display line, max 20ch, with a 220 px rule above, then a quiet four-item PrincipleList on a Panel (body, body-small, mono-label only) | The line carries the idea; the copy has four principles that need a home (override C1). |
+| Contact | Heading in columns 1 to 5, Panel with form in columns 6 to 12 | Defined in Phase 4 (C6). |
+| Footer | Three bands; the detail paragraph sits on plain `--color-bg` with the drafting grid removed behind it | Text must not sit on the grid (C2, D2b). Includes the "Press" line from CONTENT (C13). |
+| Work heading | Visually hidden h2 "Work" unless Nora supplies visible copy | Landmark map needs it (C5). |
 | Section rhythm | 128 px top padding (80 below 768); a coordinate label per section | Calm, slow reading. |
 | Density | Low to medium; copy is short | Brand is calm. |
-| Stacking | Below 1024 px the hero and case study stack to one column; services use 2 columns below 768 | Two 7/5 columns get tight at 768 to 1023. |
+| Stacking | Below 1024 px the hero and case study stack to one column; services use 2 columns below 1024 | Two 7/5 columns get tight at 768 to 1023. |
 | Collage rule | **Collage and overlays never sit under body text.** Text lives on Panels. | G0 and RESEARCH section 4. |
 
 ### Spacing
@@ -67,6 +70,7 @@ Scale (4 px base, unchanged from the team default): `--space-1` 4, `--space-2` 8
 | Page side margin | `--space-12` (48) from 1024 up, `--space-4` (16) below 768, `--space-8` (32) between | Preview used 40 and 18, which are off-scale; snapped to the scale. |
 | Column gap | `--space-6` (24) | 12-column grid with a 24 px gutter. |
 | Gap between the two hero regions | `--space-12` (48) | Preview used 40; snapped. |
+| Hero top padding | `--space-12` (48) below the 60 px header | Puts H1, intro and CTA above the fold (D6); 128 px section padding would push them down. |
 | Section top padding | `--space-32` (128) desktop, `--space-20` (80) below 768 | Preview used 120 and 80. |
 | Panel padding | `--space-8` (32) desktop, `--space-6` (24) mobile | Preview used 36 and 22. |
 | Inside lists and cards | `--space-3` to `--space-6` | Small steps keep the sheet dense but calm. |
@@ -222,6 +226,8 @@ Framer Motion needs numbers, not CSS variables: Dex mirrors the motion tokens on
 | Aspect ratios | Hero 35:32, fragment 4:5, case-study image about 4:5, thumbnails 3:2 | Fixed ratios keep overlay registration and avoid layout shift. |
 | Format and size | Production: AVIF or WebP with JPEG fallback, width 1400 max for the hero, 900 for others; hero at most 250 KB, others at most 150 KB | Speed is priority 3. Preview hotlinks Unsplash JPEG `w=1400`. |
 | Loading | Hero `fetchpriority="high"`; everything else `loading="lazy"`; explicit width and height | LCP and no layout shift. |
+| Hero credit | One caption row under the hero image, never over it: "Image: {credit}" in mono-label (11 px); the hint line sits on the same row at the end edge on desktop, below on mobile | G0 credit rule (C7). |
+| Reuse | Six photos cover about eight slots by cropping; Dex confirms crops against `photos.json` | C11. |
 | Alt text | Describes the image literally; caption "Image: photographer / Unsplash"; never claims it is the studio's work | G0 rule. |
 | Linework over photo | At most three layers (outline, dimension, leader) in white or `--color-focus`-free ink; 1.2 px | Avoid blueprint cliché. |
 
@@ -289,7 +295,7 @@ Mechanism (not just intent):
 
 ## 11. Interaction
 ### 11.1 Navigation
-Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list; the CTA stays visible. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
+Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list, and the coordinate label is hidden; the CTA stays visible. Below 480 px the CTA label is "Contact" and keeps `aria-label="Start a conversation"`. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
 
 ### 11.2 Global states
 | State | Rule |
@@ -326,7 +332,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Component | Source | Modifications / notes |
 |---|---|---|
 | SkipLink | custom | First focusable element; jumps to main. |
-| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure. |
+| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure and CoordLabel is hidden. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
 | CoordLabel | custom | Mono label such as "01 / Intro", updated by IntersectionObserver; `aria-hidden`, since headings name the sections. |
 | IndexDisclosure | custom | 44×44 button below 768 px that opens a full-width list of the three anchors. Panel stays mounted; opens with `translateY(-8px)` + opacity (10.7), never height. |
 | Button (primary) | custom | Accent fill, `--color-on-accent` label, mono-ui, square. |
@@ -337,11 +343,12 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Hotspot | custom | Real `<button>`, 44×44 hit area, pin dot Ø10 with halo. |
 | NoteCard | custom | Number, name, one line; mono-caption; square, bordered. Always mounted, shown by CSS (opacity, transform, visibility). |
 | PlanToggle | custom | Inverse-colour button, `aria-pressed`, shortcut P. |
-| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 01 — fragment" caption. |
+| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 00 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
 | CaseStudy | custom | Image with annotation spots, title, SpecList, two thumbnails. |
 | SpecList | custom | `dl` in mono-caption: place, year, type. |
-| ServiceItem | custom | Name, one line, small line icon that turns accent on hover. |
+| ServiceItem | custom | Name, one line, small line icon. **Non-interactive** (no link, no focus stop); the icon turns accent on hover only under `(hover: hover)`. |
 | PhilosophyQuote | custom | Display-quote with a 220 px ink rule above. |
+| PrincipleList | custom | Four quiet items on a Panel below the quote: mono-label number, `body` title, `body-small` detail. No new display style. |
 | ContactForm | custom | Name, email, message; Field, FieldError, SentMessage; no backend. |
 | Field (input, textarea) | custom | 1 px border, label above, drawn line under focus. |
 | Footer | custom | Mono-caption, fictional notice and credits pointer. |
@@ -356,7 +363,7 @@ State matrix (all states use only tokens; hover is skipped on touch):
 | Hotspot | pin dot, halo 0 | halo 0.2 accent, scale up to 1.45, magnetic pull within 80 px | halo and card as hover plus ring | pinned: filled halo, `aria-pressed=true` | n/a | n/a |
 | NoteCard | hidden | n/a | shown for the focused hotspot | pinned stays until Esc | n/a | n/a |
 | PlanToggle | inverse fill | slight lift of label opacity to 1 | focus ring | `aria-pressed=true` swaps to surface fill, ink label | n/a | n/a |
-| ServiceItem | muted icon line | icon line to accent | focus ring on whole item | icon accent-hover | n/a | n/a |
+| ServiceItem | muted icon line | icon line to accent, only under `(hover: hover)` | none (not focusable) | none | n/a | n/a |
 | Field | 1 px border, label above | border to `--color-text` | line draws under field (accent, `--line-focus`, `scaleX` from the start edge), border stays | n/a | muted, dashed border | border and message in `--color-danger`, icon, text; `aria-invalid` and `aria-describedby` |
 | IndexDisclosure | 44×44 mono "Index" | border to text | focus ring | open: `aria-expanded=true` | n/a | n/a |
 
@@ -379,6 +386,14 @@ State matrix (all states use only tokens; hover is skipped on touch):
 | AGENTS.md: animate transform and opacity only | Also allow **stroke-dashoffset** for SVG line drawing, **`clip-path` on the single plan layer** for the lens (transform-only lens is the documented fallback), and one **Framer `layoutId` wrapper** for the image expand | Line drawing is the direction's signature; the lens needs a clip; Kai's review confirmed these are the only exceptions. **Approved by Parsa 2026-10-25;** Phase 12 performance profile still required. |
 | Spacing, radius, breakpoints, durations, easing scales | **Unchanged** (no scale was changed) | Defaults fit the direction; preview off-scale values (40, 18, 22, 36, 120 px; 860 px breakpoint) were snapped to the scale. |
 | Radius use | `--radius-full` allowed for pins and lens only; sm, md, lg unused | Circles at junctions are the survey mark. |
+| Philosophy is one display line (section 5) | Plus a quiet four-item PrincipleList on a Panel below it, using body, body-small and mono-label only (C1) | The copy has four principles; no new display style. |
+| All text lives on Panels | Panels required for paragraphs, forms and lists of sentences; headings, mono labels, captions and one-line display quotes may sit on the grid; footer detail paragraph sits on plain `--color-bg` with the drafting grid removed (C2) | Matches the approved prototype; keeps the never-under-body-text rule. |
+| Header shows CoordLabel and full CTA at every width | CoordLabel hidden below 768; CTA label "Contact" below 480 with `aria-label="Start a conversation"` (C3) | Header too full at 390 px. |
+| ServiceItem has focus ring and hover (state matrix) | Non-interactive: no focus stop; hover tint only under `(hover: hover)` (C4) | Services have no destination. |
+| Services 2 columns below 768 | 2 columns below 1024 (C8) | About 158 px per column at 768 to 1023. |
+| FragmentFigure overlaps the hero Panel | Overlap stops at the Panel padding box edge; hidden below 1024 (C9) | Never over text. |
+| Section top padding `--space-32` | Hero only: `--space-12` (D6) | Hero text above the fold. |
+| Case-study image 4:5 at all widths | Height capped at `min(704px, 80svh)` at 768 (D10); 704 px is the content width at 768, a one-off, not on the spacing scale | 880 px high is too tall on a tablet. |
 | Motion library routing | CSS and Framer Motion only; GSAP ScrollTrigger and anime.js not used | No pinned or scrubbed scene; keeps the bundle small. |
 
 ## 15. References
@@ -406,6 +421,15 @@ General drawing conventions (plan, section, dimension lines, grid bubbles) are u
 | 2026-10-25 | P2-10 applied: `AnimatePresence` dropped; NoteCard and Index panel always mounted, CSS toggled | 10.1, 12 | Simpler, one fewer ownership split. |
 | 2026-10-25 | P2-11, 12, 13, 14, 15, 16 applied: rect read on `pointerenter` and refreshed on scroll/resize; budget counts animating groups and removes `will-change`; dashoffset claim corrected and draw SVG blend-free; field line uses `--line-focus` + `scaleX`; one-time pin 1 halo pulse; plan SVG init on idle ≤ 2 s or `pointerenter` | 10.3, 10.4, 10.1, 12, 11.3 | Kai findings 11 to 16. |
 | 2026-10-25 | Parsa request: accent shifted toward red. `--color-accent` `#C84A28` → `#C73E2C` (hue 13° → 7°); `--color-accent-hover` `#A63A1B` → `#A5301F`; `--color-focus` follows. Prose "orange" → "vermilion / red-orange" | Token block, 7, 11 | Parsa wanted the same family, more red. White on accent 4.70 → 5.06:1; accent on bg 3.99 → 4.29:1. Still never text (4.29 < 4.5). Close to `--color-danger` in hue: errors always carry icon plus text, never colour alone. |
-| 2026-10-25 | Parsa decisions: name Studio Oriel confirmed (section 1); AGENTS.md exception approved (section 14). Approval line stays "Pending Parsa" at that time | 1, 14 | Parsa via Milo. |
-| 2026-10-26 | DNA approved by Parsa. Approval line set to approved | 1 | Parsa via Milo. |
+| 2026-10-25 | Parsa decisions: name Studio Oriel confirmed (section 1); AGENTS.md exception approved (section 14). Approval line stays "Pending Parsa" | 1, 14 | Parsa via Milo. |
+| 2026-10-26 | Override C1 logged: philosophy = one display line + PrincipleList on a Panel | 5, 12, 14 | Four principles exist in the copy; no new type style. Requested by Milo from Phase 4. |
+| 2026-10-26 | Override C2 logged: Panels required for paragraphs, forms, sentence lists; headings, labels, captions and one-line quotes may sit on the grid; footer paragraph on plain `--color-bg` | 5, 14 | The approved prototype already put short lines on the grid. |
+| 2026-10-26 | Override C3 logged: CoordLabel hidden below 768; CTA "Contact" below 480 with aria-label "Start a conversation" | 11.1, 12, 14 | Header too full at 390 px. Width in the 480 to 767 range still to measure with real fonts. |
+| 2026-10-26 | Override C4 logged: ServiceItem non-interactive; hover tint only under `(hover: hover)`; state matrix updated | 12, 14 | Services have no destination, so a focus stop would mislead. |
+| 2026-10-26 | Override C8 logged: services 2 columns below 1024 (was 768) | 5, 14 | Four across are about 158 px each at 768 to 1023. |
+| 2026-10-26 | Override C9 logged: FragmentFigure overlap limited to Panel padding box edge; hidden below 1024 | 5, 12, 14 | It must never cover text. |
+| 2026-10-26 | Override D6 logged: hero top padding `--space-12` | 5, Spacing, 14 | H1, intro and CTA above the fold. |
+| 2026-10-26 | Override D10 logged: case-study image height `min(704px, 80svh)` at 768; 704 is the content width at 768, a derived one-off, not a token | 5, 14 | A 4:5 image at 704 px wide is 880 px high. |
+| 2026-10-26 | Added without override (gaps filled): contact and footer layout, hidden Work h2, hero credit caption, photo reuse note, PrincipleList in inventory | 5, 8, 12 | Phase 4 items C5, C6, C7, C11, C13; no token or colour changed. |
 | 2026-10-25 | Declined: none. Kept: spring numbers other than pin damping stay as written (Kai agrees they are sane; re-tune in Phase 6) | 10.2 | Not a disagreement; noted for completeness. |
+| 2026-10-26 | Hero fragment caption renumbered "FIG. 01 — fragment" → "FIG. 00 — fragment" | 12 (FragmentFigure) | "FIG. 01" was used twice (hero fragment and case-study main image). Milo. |

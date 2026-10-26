@@ -151,6 +151,7 @@ Scale (4 px base, unchanged from the team default): `--space-1` 4, `--space-2` 8
 | Page side margin | `--space-12` (48) from 1024 up, `--space-4` (16) below 768, `--space-8` (32) between | Preview used 40 and 18, which are off-scale; snapped to the scale. |
 | Column gap | `--space-6` (24) | 12-column grid with a 24 px gutter. |
 | Gap between the two hero regions | `--space-12` (48) | Preview used 40; snapped. |
+| Hero top padding | `--space-12` (48) below the 60 px header | Puts H1, intro and CTA above the fold (D6); 128 px section padding would push them down. |
 | Section top padding | `--space-32` (128) desktop, `--space-20` (80) below 768 | Preview used 120 and 80. |
 | Panel padding | `--space-8` (32) desktop, `--space-6` (24) mobile | Preview used 36 and 22. |
 | Inside lists and cards | `--space-3` to `--space-6` | Small steps keep the sheet dense but calm. |
@@ -173,7 +174,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Component | Source | Modifications / notes |
 |---|---|---|
 | SkipLink | custom | First focusable element; jumps to main. |
-| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure. |
+| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure and CoordLabel is hidden. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
 | CoordLabel | custom | Mono label such as "01 / Intro", updated by IntersectionObserver; `aria-hidden`, since headings name the sections. |
 | IndexDisclosure | custom | 44×44 button below 768 px that opens a full-width list of the three anchors. Panel stays mounted; opens with `translateY(-8px)` + opacity (10.7), never height. |
 | Button (primary) | custom | Accent fill, `--color-on-accent` label, mono-ui, square. |
@@ -184,11 +185,12 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Hotspot | custom | Real `<button>`, 44×44 hit area, pin dot Ø10 with halo. |
 | NoteCard | custom | Number, name, one line; mono-caption; square, bordered. Always mounted, shown by CSS (opacity, transform, visibility). |
 | PlanToggle | custom | Inverse-colour button, `aria-pressed`, shortcut P. |
-| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 01 — fragment" caption. |
+| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 00 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
 | CaseStudy | custom | Image with annotation spots, title, SpecList, two thumbnails. |
 | SpecList | custom | `dl` in mono-caption: place, year, type. |
-| ServiceItem | custom | Name, one line, small line icon that turns accent on hover. |
+| ServiceItem | custom | Name, one line, small line icon. **Non-interactive** (no link, no focus stop); the icon turns accent on hover only under `(hover: hover)`. |
 | PhilosophyQuote | custom | Display-quote with a 220 px ink rule above. |
+| PrincipleList | custom | Four quiet items on a Panel below the quote: mono-label number, `body` title, `body-small` detail. No new display style. |
 | ContactForm | custom | Name, email, message; Field, FieldError, SentMessage; no backend. |
 | Field (input, textarea) | custom | 1 px border, label above, drawn line under focus. |
 | Footer | custom | Mono-caption, fictional notice and credits pointer. |
@@ -203,6 +205,6 @@ State matrix (all states use only tokens; hover is skipped on touch):
 | Hotspot | pin dot, halo 0 | halo 0.2 accent, scale up to 1.45, magnetic pull within 80 px | halo and card as hover plus ring | pinned: filled halo, `aria-pressed=true` | n/a | n/a |
 | NoteCard | hidden | n/a | shown for the focused hotspot | pinned stays until Esc | n/a | n/a |
 | PlanToggle | inverse fill | slight lift of label opacity to 1 | focus ring | `aria-pressed=true` swaps to surface fill, ink label | n/a | n/a |
-| ServiceItem | muted icon line | icon line to accent | focus ring on whole item | icon accent-hover | n/a | n/a |
+| ServiceItem | muted icon line | icon line to accent, only under `(hover: hover)` | none (not focusable) | none | n/a | n/a |
 | Field | 1 px border, label above | border to `--color-text` | line draws under field (accent, `--line-focus`, `scaleX` from the start edge), border stays | n/a | muted, dashed border | border and message in `--color-danger`, icon, text; `aria-invalid` and `aria-describedby` |
 | IndexDisclosure | 44×44 mono "Index" | border to text | focus ring | open: `aria-expanded=true` | n/a | n/a |

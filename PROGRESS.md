@@ -6,8 +6,8 @@
 | 1 | Brief and research | done (Nora), checked by Milo; Refero not used (Parsa skipped it) |
 | 2 | Visual direction | done: Parsa chose C (Survey Sheet) on 2026-10-25; interactive hero prototype built |
 | 3 | Design DNA | done: Parsa approved 2026-10-26 (accent #C73E2C, name Studio Oriel confirmed, motion exception approved); Kai review applied |
-| 4 | UX and content | in progress (Nora, Wren) |
-| 5 | Mockups | not started |
+| 4 | UX and content | done 2026-10-26: UX.md, CONTENT.md (Nora); SITEMAP.md, SECTION_SPECS.md, wireframes (Wren); layout overrides logged in DNA by Vera |
+| 5 | Mockups | next (Kai, HTML prototype); needs Parsa approval (G2) |
 | 6 | Tokens and foundation | not started |
 | 7 | Base components and shell | not started |
 | 8 | Sections and pages | not started |
