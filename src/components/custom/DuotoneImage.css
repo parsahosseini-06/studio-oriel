@@ -1,0 +1,31 @@
+.duo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-photo-base);
+}
+.duo img {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--pos, 50% 50%);
+  filter: grayscale(1) contrast(1.15) brightness(1.08);
+  mix-blend-mode: multiply;
+  transform: scale(var(--zoom, 1));
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+}
+/* bottom vignette */
+.duo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgb(29 34 38 / 0.18));
+  pointer-events: none;
+}
+.duo__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}

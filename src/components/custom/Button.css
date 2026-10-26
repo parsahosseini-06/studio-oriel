@@ -1,0 +1,31 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 44px;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border: 0;
+  border-radius: var(--radius-none);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+.btn:active {
+  background: var(--color-accent-hover);
+  transform: translateY(1px);
+}
+.btn[aria-disabled='true'] {
+  background: var(--color-border-subtle);
+  color: var(--color-text-muted);
+  cursor: default;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .btn:not([aria-disabled='true']):hover {
+    background: var(--color-accent-hover);
+  }
+}

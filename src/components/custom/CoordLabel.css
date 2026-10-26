@@ -1,0 +1,16 @@
+.coord {
+  display: none;
+  position: absolute;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+@media (min-width: 1200px) {
+  .coord {
+    display: block;
+  }
+}
+:dir(rtl) > .coord {
+  translate: 50% 0;
+}

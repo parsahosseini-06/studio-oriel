@@ -1,0 +1,22 @@
+.spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: var(--space-2) var(--space-6);
+  border-block-start: var(--line-hair) solid var(--color-border);
+  padding-block-start: var(--space-4);
+}
+.spec > div {
+  display: flex;
+  gap: var(--space-4);
+}
+.spec dt {
+  flex: 0 0 5.5em;
+  color: var(--color-text-muted);
+}
+.spec dd {
+  margin: 0;
+}
+/* the case study sets one column from 1024 to 1279 (TOKENS 1.5): add .spec--one there */
+.spec--one {
+  grid-template-columns: 1fr;
+}

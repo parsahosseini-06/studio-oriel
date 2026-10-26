@@ -9,7 +9,7 @@
 | 4 | UX and content | done 2026-10-26: UX.md, CONTENT.md (Nora); SITEMAP.md, SECTION_SPECS.md, wireframes (Wren); layout overrides logged in DNA by Vera |
 | 5 | Mockups | done 2026-10-26: Kai's responsive HTML prototype in design/mockups/prototype/, approved by Parsa (G2) |
 | 6 | Tokens and foundation | done 2026-10-26: docs/TOKENS.md (Vera); tokens.css, globals.css, self-hosted fonts, photos, smoke page (Dex); build and lint pass; fallback font metrics left for Phase 12 |
-| 7 | Base components and shell | not started |
+| 7 | Base components and shell | done 2026-10-26 (Dex): 12 custom components in src/components/custom, shell in App.jsx, dev-only kit in src/dev (remove in Phase 15); build and lint pass; checked in headless Chromium only (no Safari, Firefox, real touch, screen reader, 200% zoom); CoordLabel to verify on real scroll in Phase 8 |
 | 8 | Sections and pages | not started |
 | 9 | Motion and interaction | not started |
 | 10 | Responsive QA (LTR only) | not started |

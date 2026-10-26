@@ -1,0 +1,11 @@
+/* Phase 7 placeholder sections: replaced one by one in Phase 8. */
+.phase8 {
+  min-block-size: 60svh;
+}
+.phase8 > .wrap {
+  display: grid;
+  gap: var(--space-3);
+}
+.phase8__tag {
+  color: var(--color-text-muted);
+}

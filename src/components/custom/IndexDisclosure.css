@@ -1,0 +1,92 @@
+.index-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  padding-inline: var(--space-3);
+  background: transparent;
+  border: var(--line-hair) solid transparent;
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+@media (hover: hover) {
+  .index-btn:hover {
+    border-color: var(--color-text);
+  }
+}
+.index-btn[aria-expanded='true'] {
+  border-color: var(--color-text);
+}
+/* two-line glyph */
+.index-btn i {
+  position: relative;
+  display: block;
+  inline-size: 10px;
+  block-size: 10px;
+}
+.index-btn i::before,
+.index-btn i::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: var(--line-hair);
+  background: currentColor;
+}
+.index-btn i::before {
+  inset-block-start: 2px;
+}
+.index-btn i::after {
+  inset-block-end: 2px;
+}
+.index-panel {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 100%;
+  background: var(--color-surface);
+  border-block-end: var(--line-hair) solid var(--color-border);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(calc(var(--space-2) * -1));
+  transition:
+    opacity var(--duration-fast) var(--ease-exit),
+    transform var(--duration-fast) var(--ease-exit),
+    visibility 0s var(--duration-fast);
+}
+.index-panel--open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity var(--duration-base) var(--ease-enter),
+    transform var(--duration-base) var(--ease-enter),
+    visibility 0s;
+}
+.index-panel ul {
+  inline-size: min(100% - 2 * var(--margin), var(--maxw));
+  margin-inline: auto;
+  padding-block: var(--space-2);
+}
+.index-panel li + li {
+  border-block-start: var(--line-hair) solid var(--color-border-subtle);
+}
+.index-panel a {
+  display: flex;
+  align-items: center;
+  min-block-size: 48px;
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .index-btn,
+  .index-panel {
+    display: none;
+  }
+}
+/* reduced motion: fade only, no travel */
+@media (prefers-reduced-motion: reduce) {
+  .index-panel,
+  .index-panel--open {
+    transform: none;
+  }
+}

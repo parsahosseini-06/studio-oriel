@@ -1,0 +1,48 @@
+/* Plain --color-bg: the drafting grid is removed behind the detail paragraph (DNA C2). */
+.site-footer {
+  margin-block-start: var(--sec-pad);
+  background: var(--color-bg);
+  border-block-start: var(--line-hair) solid var(--color-border);
+  padding-block: var(--space-12);
+}
+.foot {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+.foot p {
+  max-inline-size: 65ch;
+  color: var(--color-text-muted);
+}
+.foot .foot__notice,
+.foot .foot__wm {
+  color: var(--color-text);
+}
+.foot__text p + p {
+  margin-block-start: var(--space-4);
+}
+.foot__links {
+  display: grid;
+  justify-items: start;
+}
+.foot__links > span {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+}
+/* 12-column footer from 1024: wordmark 1-3, text 4-8, links 9-12 */
+@media (min-width: 1024px) {
+  .foot {
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    column-gap: var(--grid-gap);
+  }
+  .foot__wm {
+    grid-column: 1 / span 3;
+  }
+  .foot__text {
+    grid-column: 4 / span 5;
+  }
+  .foot__links {
+    grid-column: 9 / span 4;
+  }
+}

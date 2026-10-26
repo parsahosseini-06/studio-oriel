@@ -1,0 +1,8 @@
+.panel {
+  background: var(--color-surface);
+  border: var(--line-hair) solid var(--color-border);
+  padding: var(--panel-pad);
+}
+.panel p {
+  max-inline-size: 40ch;
+}
