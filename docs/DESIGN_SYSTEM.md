@@ -43,12 +43,33 @@ Mirror of `design DNA.md` (tokens, typography, colour, spacing, radius, surface,
   --ease-enter: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-exit: cubic-bezier(0.2, 0, 0, 1);   /* ease-out shape: leaving things start moving at once */
 
+  /* layout (section 5); step on the breakpoints below */
+  --margin: var(--space-4);       /* 16 below 768, --space-8 from 768, --space-12 from 1024 */
+  --sec-pad: var(--space-20);     /* --space-32 from 768 */
+  --panel-pad: var(--space-6);    /* --space-8 from 768 */
+  --header-h: 60px;
+  --maxw: 1280px;
+
+  /* type sizes (section 6), fluid */
+  --t-display: clamp(36px, 4.4vw, 60px);
+  --t-quote: clamp(30px, 4.4vw, 60px);
+  --t-heading: clamp(30px, 3.4vw, 46px);
+
+  /* stacking (section 9) */
+  --z-raised: 2; --z-hotspot: 3; --z-card: 4; --z-header: 10; --z-skip: 20;
+
+  /* 12-column grid (section 5) */
+  --grid-cols: 12;
+  --grid-gap: var(--space-6);
+  --grid-region-gap: var(--space-12);
+  --grid-size: var(--space-12);   /* drafting-grid cell */
+
   /* line weights (section 9) */
   --line-hair: 1px; --line-draw: 1.2px; --line-focus: 2px;
   --draw-stroke: 1.2;  /* SVG stroke-width in viewBox units; overridden per breakpoint so lines stay about 1.2 px on screen */
 }
 ```
-Breakpoints (not CSS variables, used in media queries): 480, 768, 1024, 1280 px. Test widths: 375, 390, 768, 1024, 1280, 1440.
+Breakpoints (not CSS variables, used in media queries): 480, 768, 1024, 1200 (header coordinate label only), 1280 px, plus the landscape-phone rule `(orientation: landscape) and (max-height: 520px) and (min-width: 640px)`, which gets the two-column hero because a stacked photo would fill the whole screen. Test widths: 375, 390, 768, 1024, 1280, 1440.
 Framer Motion needs numbers, not CSS variables: Dex mirrors the motion tokens once in `src/motion/tokens.ts` (durations in seconds, easings as 4-number arrays, spring configs). **The CSS values above are the source**; the mirror file carries a comment pointing here.
 
 ## Typography (DNA section 6)
@@ -58,7 +79,9 @@ Framer Motion needs numbers, not CSS variables: Dex mirrors the motion tokens on
 | `--font-body` | Manrope | 300 at 17 px, 400 at 14 px and below | chosen for now | One family keeps the sheet calm; weight 400 under 15 px because 300 gets thin at small sizes. |
 | `--font-mono` | JetBrains Mono | 400 (500 for buttons) | chosen for now | Mono labels carry dimensions, figure numbers and coordinates, the "survey" voice. |
 
-Licence: both families are published on Google Fonts under the SIL Open Font License. **TBD (Phase 6): confirm licence text from the font repositories, decide self-host vs Google Fonts, subset to Latin, cap weights to the ones listed, add `font-display: swap` and size-adjusted fallbacks.**
+Fonts (closed 2026-10-26): self-hosted Latin variable subsets in `public/fonts/` (`Manrope-Variable-latin.woff2`, weights 200 to 800; `JetBrainsMono-Variable-latin.woff2`, declared `400 800`), both under the SIL Open Font License 1.1 with licence texts in the same folder (`LICENSE-Manrope-OFL.txt`, `LICENSE-JetBrainsMono-OFL.txt`). `font-display: swap`; only Manrope is preloaded (`index.html`). **Still open (TBD, Phase 12): size-adjusted fallback metrics (`size-adjust`, `ascent-override`), decided after a CLS check.**
+
+Type roles live as classes in `src/styles/globals.css` with fixed pixel sizes (11, 12, 13, 14, 17, 20) plus the three fluid tokens (`--t-display`, `--t-quote`, `--t-heading`). Phase 7 components must use those classes and never set their own font sizes. The `→` glyph is in neither font and falls back to a system font; Phase 7 uses an inline SVG arrow with the same stroke as the link underline instead.
 
 | Role | Size (min to max, fluid) | Line height | Weight | Tracking | Use |
 |---|---|---|---|---|---|
@@ -174,7 +197,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Component | Source | Modifications / notes |
 |---|---|---|
 | SkipLink | custom | First focusable element; jumps to main. |
-| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure and CoordLabel is hidden. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
+| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure; CoordLabel is hidden below 1200 px. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
 | CoordLabel | custom | Mono label such as "01 / Intro", updated by IntersectionObserver; `aria-hidden`, since headings name the sections. |
 | IndexDisclosure | custom | 44×44 button below 768 px that opens a full-width list of the three anchors. Panel stays mounted; opens with `translateY(-8px)` + opacity (10.7), never height. |
 | Button (primary) | custom | Accent fill, `--color-on-accent` label, mono-ui, square. |
@@ -185,7 +208,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Hotspot | custom | Real `<button>`, 44×44 hit area, pin dot Ø10 with halo. |
 | NoteCard | custom | Number, name, one line; mono-caption; square, bordered. Always mounted, shown by CSS (opacity, transform, visibility). |
 | PlanToggle | custom | Inverse-colour button, `aria-pressed`, shortcut P. |
-| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 00 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
+| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 01 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
 | CaseStudy | custom | Image with annotation spots, title, SpecList, two thumbnails. |
 | SpecList | custom | `dl` in mono-caption: place, year, type. |
 | ServiceItem | custom | Name, one line, small line icon. **Non-interactive** (no link, no focus stop); the icon turns accent on hover only under `(hover: hover)`. |

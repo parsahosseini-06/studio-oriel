@@ -53,7 +53,7 @@ Mechanism (not just intent):
 
 ## 11. Interaction
 ### 11.1 Navigation
-Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list, and the coordinate label is hidden; the CTA stays visible. Below 480 px the CTA label is "Contact" and keeps `aria-label="Start a conversation"`. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
+Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list, and the coordinate label is hidden below 1200 px; the CTA stays visible. Below 480 px the CTA label is "Contact" and keeps `aria-label="Start a conversation"`. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
 
 ### 11.2 Global states
 | State | Rule |

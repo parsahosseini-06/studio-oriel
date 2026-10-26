@@ -8,7 +8,7 @@
 | 3 | Design DNA | done: Parsa approved 2026-10-26 (accent #C73E2C, name Studio Oriel confirmed, motion exception approved); Kai review applied |
 | 4 | UX and content | done 2026-10-26: UX.md, CONTENT.md (Nora); SITEMAP.md, SECTION_SPECS.md, wireframes (Wren); layout overrides logged in DNA by Vera |
 | 5 | Mockups | done 2026-10-26: Kai's responsive HTML prototype in design/mockups/prototype/, approved by Parsa (G2) |
-| 6 | Tokens and foundation | not started |
+| 6 | Tokens and foundation | done 2026-10-26: docs/TOKENS.md (Vera); tokens.css, globals.css, self-hosted fonts, photos, smoke page (Dex); build and lint pass; fallback font metrics left for Phase 12 |
 | 7 | Base components and shell | not started |
 | 8 | Sections and pages | not started |
 | 9 | Motion and interaction | not started |
@@ -21,3 +21,5 @@
 | 16 | Pre-launch | not started |
 | 17 | Local handoff (no deploy) | not started |
 | 18 | After launch | not started |
+
+Notes: 2026-10-26 GitHub repo https://github.com/parsahosseini-06/studio-oriel (public, branch feat/visual-direction pushed). Mockup preview live at https://studio-oriel.vercel.app (static copy of design/mockups/prototype, deployed by Parsa from /tmp; final deploy is Phase 17, G4).

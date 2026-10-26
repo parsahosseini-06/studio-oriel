@@ -82,7 +82,9 @@ Scale (4 px base, unchanged from the team default): `--space-1` 4, `--space-2` 8
 | `--font-body` | Manrope | 300 at 17 px, 400 at 14 px and below | chosen for now | One family keeps the sheet calm; weight 400 under 15 px because 300 gets thin at small sizes. |
 | `--font-mono` | JetBrains Mono | 400 (500 for buttons) | chosen for now | Mono labels carry dimensions, figure numbers and coordinates, the "survey" voice. |
 
-Licence: both families are published on Google Fonts under the SIL Open Font License. **TBD (Phase 6): confirm licence text from the font repositories, decide self-host vs Google Fonts, subset to Latin, cap weights to the ones listed, add `font-display: swap` and size-adjusted fallbacks.**
+Fonts (closed 2026-10-26): self-hosted Latin variable subsets in `public/fonts/` (`Manrope-Variable-latin.woff2`, weights 200 to 800; `JetBrainsMono-Variable-latin.woff2`, declared `400 800`), both under the SIL Open Font License 1.1 with licence texts in the same folder (`LICENSE-Manrope-OFL.txt`, `LICENSE-JetBrainsMono-OFL.txt`). `font-display: swap`; only Manrope is preloaded (`index.html`). **Still open (TBD, Phase 12): size-adjusted fallback metrics (`size-adjust`, `ascent-override`), decided after a CLS check.**
+
+Type roles live as classes in `src/styles/globals.css` with fixed pixel sizes (11, 12, 13, 14, 17, 20) plus the three fluid tokens (`--t-display`, `--t-quote`, `--t-heading`). Phase 7 components must use those classes and never set their own font sizes. The `→` glyph is in neither font and falls back to a system font; Phase 7 uses an inline SVG arrow with the same stroke as the link underline instead.
 
 | Role | Size (min to max, fluid) | Line height | Weight | Tracking | Use |
 |---|---|---|---|---|---|
@@ -208,12 +210,33 @@ Overlay text on photos ("12 400 mm", "PLAN A–A", figure labels) is decorative 
   --ease-enter: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-exit: cubic-bezier(0.2, 0, 0, 1);   /* ease-out shape: leaving things start moving at once */
 
+  /* layout (section 5); step on the breakpoints below */
+  --margin: var(--space-4);       /* 16 below 768, --space-8 from 768, --space-12 from 1024 */
+  --sec-pad: var(--space-20);     /* --space-32 from 768 */
+  --panel-pad: var(--space-6);    /* --space-8 from 768 */
+  --header-h: 60px;
+  --maxw: 1280px;
+
+  /* type sizes (section 6), fluid */
+  --t-display: clamp(36px, 4.4vw, 60px);
+  --t-quote: clamp(30px, 4.4vw, 60px);
+  --t-heading: clamp(30px, 3.4vw, 46px);
+
+  /* stacking (section 9) */
+  --z-raised: 2; --z-hotspot: 3; --z-card: 4; --z-header: 10; --z-skip: 20;
+
+  /* 12-column grid (section 5) */
+  --grid-cols: 12;
+  --grid-gap: var(--space-6);
+  --grid-region-gap: var(--space-12);
+  --grid-size: var(--space-12);   /* drafting-grid cell */
+
   /* line weights (section 9) */
   --line-hair: 1px; --line-draw: 1.2px; --line-focus: 2px;
   --draw-stroke: 1.2;  /* SVG stroke-width in viewBox units; overridden per breakpoint so lines stay about 1.2 px on screen */
 }
 ```
-Breakpoints (not CSS variables, used in media queries): 480, 768, 1024, 1280 px. Test widths: 375, 390, 768, 1024, 1280, 1440.
+Breakpoints (not CSS variables, used in media queries): 480, 768, 1024, 1200 (header coordinate label only), 1280 px, plus the landscape-phone rule `(orientation: landscape) and (max-height: 520px) and (min-width: 640px)`, which gets the two-column hero because a stacked photo would fill the whole screen. Test widths: 375, 390, 768, 1024, 1280, 1440.
 Framer Motion needs numbers, not CSS variables: Dex mirrors the motion tokens once in `src/motion/tokens.ts` (durations in seconds, easings as 4-number arrays, spring configs). **The CSS values above are the source**; the mirror file carries a comment pointing here.
 
 ## 8. Imagery
@@ -295,7 +318,7 @@ Mechanism (not just intent):
 
 ## 11. Interaction
 ### 11.1 Navigation
-Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list, and the coordinate label is hidden; the CTA stays visible. Below 480 px the CTA label is "Contact" and keeps `aria-label="Start a conversation"`. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
+Thin sticky header (60 px): wordmark at start, coordinate label centred, three anchors (Work, Services, Philosophy) and the CTA "Start a conversation" at end. Anchors scroll smoothly (instant under reduced motion) and move focus to the section heading. Below 768 px the anchors move into an **Index** disclosure button (44×44 min) that opens a full-width list, and the coordinate label is hidden below 1200 px; the CTA stays visible. Below 480 px the CTA label is "Contact" and keeps `aria-label="Start a conversation"`. A skip link is the first tab stop. The label bar of the direction preview is not shipped.
 
 ### 11.2 Global states
 | State | Rule |
@@ -332,7 +355,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Component | Source | Modifications / notes |
 |---|---|---|
 | SkipLink | custom | First focusable element; jumps to main. |
-| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure and CoordLabel is hidden. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
+| Header | custom | Sticky 60 px, wordmark, CoordLabel, 3 anchors, CTA. Below 768 px anchors move into IndexDisclosure; CoordLabel is hidden below 1200 px. Below 480 px the CTA label is "Contact" with `aria-label="Start a conversation"`. |
 | CoordLabel | custom | Mono label such as "01 / Intro", updated by IntersectionObserver; `aria-hidden`, since headings name the sections. |
 | IndexDisclosure | custom | 44×44 button below 768 px that opens a full-width list of the three anchors. Panel stays mounted; opens with `translateY(-8px)` + opacity (10.7), never height. |
 | Button (primary) | custom | Accent fill, `--color-on-accent` label, mono-ui, square. |
@@ -343,7 +366,7 @@ Source is **custom** for every component. No shadcn/ui, 21st.dev or React Bits c
 | Hotspot | custom | Real `<button>`, 44×44 hit area, pin dot Ø10 with halo. |
 | NoteCard | custom | Number, name, one line; mono-caption; square, bordered. Always mounted, shown by CSS (opacity, transform, visibility). |
 | PlanToggle | custom | Inverse-colour button, `aria-pressed`, shortcut P. |
-| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 00 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
+| FragmentFigure | custom | Small photo with 1 px frame and "FIG. 01 — fragment" caption. Overlaps the hero Panel only as far as the Panel's padding box edge, never over its text; hidden below 1024 px. |
 | CaseStudy | custom | Image with annotation spots, title, SpecList, two thumbnails. |
 | SpecList | custom | `dl` in mono-caption: place, year, type. |
 | ServiceItem | custom | Name, one line, small line icon. **Non-interactive** (no link, no focus stop); the icon turns accent on hover only under `(hover: hover)`. |
@@ -388,7 +411,7 @@ State matrix (all states use only tokens; hover is skipped on touch):
 | Radius use | `--radius-full` allowed for pins and lens only; sm, md, lg unused | Circles at junctions are the survey mark. |
 | Philosophy is one display line (section 5) | Plus a quiet four-item PrincipleList on a Panel below it, using body, body-small and mono-label only (C1) | The copy has four principles; no new display style. |
 | All text lives on Panels | Panels required for paragraphs, forms and lists of sentences; headings, mono labels, captions and one-line display quotes may sit on the grid; footer detail paragraph sits on plain `--color-bg` with the drafting grid removed (C2) | Matches the approved prototype; keeps the never-under-body-text rule. |
-| Header shows CoordLabel and full CTA at every width | CoordLabel hidden below 768; CTA label "Contact" below 480 with `aria-label="Start a conversation"` (C3) | Header too full at 390 px. |
+| Header shows CoordLabel and full CTA at every width | CoordLabel hidden below 1200 (was 768); CTA label "Contact" below 480 with `aria-label="Start a conversation"` (C3) | Header too full at 390 px. |
 | ServiceItem has focus ring and hover (state matrix) | Non-interactive: no focus stop; hover tint only under `(hover: hover)` (C4) | Services have no destination. |
 | Services 2 columns below 768 | 2 columns below 1024 (C8) | About 158 px per column at 768 to 1023. |
 | FragmentFigure overlaps the hero Panel | Overlap stops at the Panel padding box edge; hidden below 1024 (C9) | Never over text. |
@@ -424,12 +447,17 @@ General drawing conventions (plan, section, dimension lines, grid bubbles) are u
 | 2026-10-25 | Parsa decisions: name Studio Oriel confirmed (section 1); AGENTS.md exception approved (section 14). Approval line stays "Pending Parsa" | 1, 14 | Parsa via Milo. |
 | 2026-10-26 | Override C1 logged: philosophy = one display line + PrincipleList on a Panel | 5, 12, 14 | Four principles exist in the copy; no new type style. Requested by Milo from Phase 4. |
 | 2026-10-26 | Override C2 logged: Panels required for paragraphs, forms, sentence lists; headings, labels, captions and one-line quotes may sit on the grid; footer paragraph on plain `--color-bg` | 5, 14 | The approved prototype already put short lines on the grid. |
-| 2026-10-26 | Override C3 logged: CoordLabel hidden below 768; CTA "Contact" below 480 with aria-label "Start a conversation" | 11.1, 12, 14 | Header too full at 390 px. Width in the 480 to 767 range still to measure with real fonts. |
+| 2026-10-26 | Override C3 logged: CoordLabel hidden below 768 (superseded below, now 1200); CTA "Contact" below 480 with aria-label "Start a conversation" | 11.1, 12, 14 | Header too full at 390 px. Width in the 480 to 767 range still to measure with real fonts. |
 | 2026-10-26 | Override C4 logged: ServiceItem non-interactive; hover tint only under `(hover: hover)`; state matrix updated | 12, 14 | Services have no destination, so a focus stop would mislead. |
 | 2026-10-26 | Override C8 logged: services 2 columns below 1024 (was 768) | 5, 14 | Four across are about 158 px each at 768 to 1023. |
 | 2026-10-26 | Override C9 logged: FragmentFigure overlap limited to Panel padding box edge; hidden below 1024 | 5, 12, 14 | It must never cover text. |
 | 2026-10-26 | Override D6 logged: hero top padding `--space-12` | 5, Spacing, 14 | H1, intro and CTA above the fold. |
 | 2026-10-26 | Override D10 logged: case-study image height `min(704px, 80svh)` at 768; 704 is the content width at 768, a derived one-off, not a token | 5, 14 | A 4:5 image at 704 px wide is 880 px high. |
 | 2026-10-26 | Added without override (gaps filled): contact and footer layout, hidden Work h2, hero credit caption, photo reuse note, PrincipleList in inventory | 5, 8, 12 | Phase 4 items C5, C6, C7, C11, C13; no token or colour changed. |
+| 2026-10-26 | Phase 6 token pass: added layout tokens `--margin`, `--sec-pad`, `--panel-pad`, `--header-h`, `--maxw`, type size tokens `--t-display`, `--t-quote`, `--t-heading` (same values as sections 5 and 6), and a z-index scale `--z-raised` 2, `--z-hotspot` 3, `--z-card` 4, `--z-header` 10, `--z-skip` 20 | Token block | Names come from Kai's approved mockup and implement values the DNA already had; z-index values are those the mockup uses. Proposed by Vera; mockup approved by Parsa. |
+| 2026-10-26 | CoordLabel shown from 1200 px instead of 768 (supersedes the C3 detail); added the 1200 breakpoint and the landscape-phone two-column hero rule | 11.1, 12, 14, Token block | Kai's mockup hides it below 1200 because wordmark, three anchors and the CTA fill the 768 to 1199 header. Proposed by Vera; mockup approved by Parsa. |
+| 2026-10-26 | Added grid tokens `--grid-cols` 12, `--grid-gap` `--space-6`, `--grid-region-gap` `--space-12`, `--grid-size` `--space-12` (values read from `src/styles/tokens.css`) | Token block, 5 | Dex introduced them while building tokens.css; they name values the DNA already had (12 columns, 24 px gutter, 48 px region gap and drafting cell). |
+| 2026-10-26 | Section 6 font TBD closed: self-hosted Latin variable subsets in `public/fonts/`, JetBrains Mono declared 400 800, `font-display: swap`, Manrope preloaded, OFL texts in the folder. Still open: size-adjusted fallback metrics (Phase 12 CLS check) | 6 | Done by Dex from docs/TOKENS.md; checked against `src/styles/globals.css`, `index.html` and the folder listing. |
+| 2026-10-26 | Type roles live as classes in `src/styles/globals.css` (fixed px sizes 11, 12, 13, 14, 17, 20); Phase 7 components must use them | 6 | One place for type, no per-component sizes. |
+| 2026-10-26 | Proposal: replace the `→` text glyph (falls back to a system font) with an inline SVG arrow in Phase 7, same stroke as the link underline | 6, 12 | Neither font has U+2192; the SVG keeps the arrow on-brand. Proposed by Vera. |
 | 2026-10-25 | Declined: none. Kept: spring numbers other than pin damping stay as written (Kai agrees they are sane; re-tune in Phase 6) | 10.2 | Not a disagreement; noted for completeness. |
-| 2026-10-26 | Hero fragment caption renumbered "FIG. 01 — fragment" → "FIG. 00 — fragment" | 12 (FragmentFigure) | "FIG. 01" was used twice (hero fragment and case-study main image). Milo. |
